@@ -1,0 +1,387 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Real Estate Medieval | Venda de Castelos</title>
+
+    <style>
+        :root {
+            --dourado: #d4af37;
+            --vinho: #641e16;
+            --pedra: #2c3e50;
+            --gelo: #ecf0f1;
+        }
+
+        body {
+            margin: 0;
+            font-family: 'Georgia', serif;
+            background-color: #1a1a1a;
+            color: var(--gelo);
+        }
+
+        /* === HEADER DE LUXO === */
+        header {
+            background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url('https://images.unsplash.com/photo-1524397057410-1e775ed476f3?auto=format&fit=crop&w=1350&q=80');
+            background-size: cover;
+            background-position: center;
+            height: 60vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            border-bottom: 5px solid var(--dourado);
+        }
+
+        .logo {
+            font-size: 1.2rem;
+            letter-spacing: 4px;
+            color: var(--dourado);
+            text-transform: uppercase;
+            margin-bottom: 10px;
+        }
+
+        header h1 {
+            font-size: 3.5rem;
+            margin: 0;
+            text-shadow: 2px 2px 10px rgba(0, 0, 0, 0.8);
+        }
+
+        /* === MENU === */
+        nav {
+            background: #000;
+            padding: 15px;
+            text-align: center;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            border-bottom: 3px solid var(--dourado);
+
+            /* Mágica para organizar os links */
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap; /* Faz os links pularem de linha se não couberem */
+            gap: 15px; /* Cria um espaço fixo entre cada link */
+        }
+
+        nav a {
+            color: #fff;
+            text-decoration: none;
+            font-weight: bold;
+            transition: 0.3s;
+            text-transform: uppercase;
+            font-size: 0.85rem; /* Diminuímos um pouquinho para caber melhor */
+            white-space: nowrap; /* Impede que o texto de um link quebre em dois */
+        }
+
+        /* Ajuste específico para telas bem pequenas (celulares) */
+        @media (max-width: 480px) {
+            nav {
+                padding: 10px;
+                gap: 10px;
+            }
+
+            nav a {
+                font-size: 0.75rem; /* Letra um pouco menor no celular */
+                padding: 5px 10px;
+                border: 1px solid rgba(212, 175, 55, 0.2); /* Um contorno sutil */
+                border-radius: 4px;
+            }
+        }
+
+        /* === CONTEÚDO DE VENDA === */
+        .container {
+            max-width: 1000px;
+            margin: -50px auto 40px;
+            background: #fff;
+            color: #333;
+            padding: 40px;
+            border-radius: 10px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.5);
+        }
+
+        .preco-tag {
+            background: var(--vinho);
+            color: white;
+            padding: 15px 30px;
+            display: inline-block;
+            font-size: 1.5rem;
+            border-radius: 5px;
+            margin-bottom: 20px;
+        }
+
+        .detalhes-imovel {
+            display: grid;
+            grid-template-columns: 2fr 1fr;
+            gap: 40px;
+        }
+
+        .caracteristicas {
+            list-style: none;
+            padding: 0;
+        }
+
+        .caracteristicas li {
+            padding: 10px 0;
+            border-bottom: 1px solid #eee;
+        }
+
+        .caracteristicas li::before {
+            content: "🛡️ ";
+        }
+
+        /* === BOTÃO DE COMPRA === */
+        .btn-comprar {
+            display: block;
+            width: 100%;
+            background: var(--dourado);
+            color: #000;
+            text-align: center;
+            padding: 20px;
+            font-size: 1.5rem;
+            font-weight: bold;
+            text-decoration: none;
+            margin-top: 30px;
+            border-radius: 5px;
+            transition: 0.4s;
+            cursor: pointer;
+            border: none;
+        }
+
+        .btn-comprar:hover {
+            background: #b8962e;
+            transform: scale(1.02);
+        }
+
+        /* === MODAL DE PERGUNTAS (SISTEMA DE VENDA) === */
+        #modalVenda {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.9);
+            z-index: 2000;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .modal-content {
+            background: var(--gelo);
+            padding: 40px;
+            border-radius: 15px;
+            max-width: 500px;
+            text-align: center;
+            border: 4px solid var(--dourado);
+            color: #333;
+        }
+
+        .btn-modal {
+            background: var(--vinho);
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            margin: 10px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-weight: bold;
+        }
+
+        .sessao-tecnica {
+            margin-top: 50px;
+            padding-top: 30px;
+            border-top: 2px dashed #ccc;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        th,
+        td {
+            padding: 12px;
+            text-align: left;
+            border-bottom: 1px solid #ddd;
+        }
+
+        @media (max-width: 768px) {
+            .detalhes-imovel {
+                grid-template-columns: 1fr;
+            }
+
+            header h1 {
+                font-size: 2rem;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <header>
+        <div class="logo">Royal Estate Luxury</div>
+        <h1>Castelo de Valerius</h1>
+        <p>A fortaleza definitiva para a sua dinastia.</p>
+    </header>
+
+    <nav>
+        <a href="index.html">Anúncio</a>
+        <a href="historia.html">História</a>
+        <a href="gestao.html">Gestão</a>
+        <a href="contato.html">Contato</a>
+    </nav>
+
+    <div class="container" id="venda">
+        <div class="preco-tag">💰 500.000 Moedas de Ouro</div>
+
+        <div class="detalhes-imovel">
+            <div>
+                <h2>Oportunidade Única de Investimento</h2>
+                <p>Apresentamos a verdadeira joia da coroa da arquitetura medieval — uma obra-prima erguida com as mais
+                    avançadas técnicas construtivas de sua época. Este castelo não representa apenas um espaço de
+                    moradia, mas a materialização da força, da autoridade e da grandiosidade de seu tempo.
+
+                    Cada pedra foi posicionada com precisão estratégica, unindo engenharia, arte e visão militar em uma
+                    estrutura imponente e duradoura. Suas muralhas robustas, torres majestosas e salões amplos refletem
+                    não apenas proteção e funcionalidade, mas também sofisticação e prestígio.
+
+                    Mais do que uma edificação, este castelo é um símbolo de poder consolidado, liderança incontestável
+                    e legado eterno. Uma construção que atravessa séculos mantendo sua imponência e reafirmando seu
+                    papel como marco da arquitetura e da história medieval.</p>
+
+                <h3>O que este castelo oferece:</h3>
+                <ul class="caracteristicas">
+                    <li><b>Localização Premium:</b> Domínio visual total.</li>
+                    <li><b>Segurança Máxima:</b> Muralhas duplas estruturadas.</li>
+                    <li><b>Torre de Menagem:</b> Espaço de comando panorâmico.</li>
+                    <li><b>Fosso Seco:</b> Proteção tática contra invasores.</li>
+                </ul>
+            </div>
+
+            <aside>
+                <div style="background: #f4f4f4; padding: 20px; border-radius: 8px;">
+                    <h3>Ficha Técnica</h3>
+                    <p><b>Área:</b> 2500 cm²</p>
+                    <p><b>Dormitórios:</b> 12</p>
+                    <p><b>Estacionamento:</b> 50 Cavalos</p>
+                    <p><b>IPTU:</b> Isento pelo Rei</p>
+                </div>
+                <button onclick="iniciarVenda()" class="btn-comprar">QUERO COMPRAR</button>
+            </aside>
+        </div>
+    </div>
+
+    <div id="modalVenda">
+        <div class="modal-content" id="modalInterno">
+            <h2 id="tituloModal">📜 Teste de Linhagem</h2>
+            <p id="textoModal">Para adquirir o Castelo de Valerius, você deve provar sua nobreza. Você possui pelo menos
+                3 dragões em seu nome?</p>
+            <div id="botoesModal">
+                <button class="btn-modal" onclick="pergunta2()">Sim, claro!</button>
+                <button class="btn-modal" onclick="falhou()">Não, apenas cavalos.</button>
+            </div>
+        </div>
+    </div>
+
+    <footer style="text-align: center; padding-bottom: 40px; color: #777;">
+        &copy; 2026 Imobiliária Real - Transformando papelão em impérios.
+    </footer>
+
+    <script>
+    // Variável para controlar o status de nobreza
+function iniciarVenda() {
+    document.getElementById('modalVenda').style.display = 'flex';
+    pergunta1();
+}
+
+function pergunta1() {
+    document.getElementById('tituloModal').innerText = "📜 Fase 1: Higiene";
+    document.getElementById('textoModal').innerText = "Quantos dentes você ainda tem na boca?";
+    document.getElementById('botoesModal').innerHTML = `
+        <button class="btn-modal" onclick="pergunta2()">Apenas 4, o suficiente para o pão.</button>
+        <button class="btn-modal" onclick="falhou('Sorriso perfeito demais? Claramente um viajante do tempo. FORA!')">Tenho todos os dentes.</button>
+    `;
+}
+
+function pergunta2() {
+    document.getElementById('tituloModal').innerText = "📜 Fase 2: Conhecimentos";
+    document.getElementById('textoModal').innerText = "Como se deve tratar um dragão faminto na porta do castelo?";
+    document.getElementById('botoesModal').innerHTML = `
+        <button class="btn-modal" onclick="pergunta3()">Ofereço uma ovelha e minha sogra.</button>
+        <button class="btn-modal" onclick="falhou('Tentar carinho? Você virou churrasco de dragão em 2 segundos.')">Tento fazer carinho no focinho.</button>
+    `;
+}
+
+function pergunta3() {
+    document.getElementById('tituloModal').innerText = "📜 Fase 3: Etiqueta";
+    document.getElementById('textoModal').innerText = "Se a comida do banquete estiver ruim, o que você faz?";
+    document.getElementById('botoesModal').innerHTML = `
+        <button class="btn-modal" onclick="pergunta4()">Prendo o cozinheiro na masmorra.</button>
+        <button class="btn-modal" onclick="falhou('Reclamar no TripAdvisor não existia em 1250, camponês!')">Peço para falar com o gerente.</button>
+    `;
+}
+
+function pergunta4() {
+    document.getElementById('tituloModal').innerText = "📜 Fase 4: Diplomacia";
+    document.getElementById('textoModal').innerText = "O reino vizinho declarou guerra porque você roubou uma galinha. Sua reação?";
+    document.getElementById('botoesModal').innerHTML = `
+        <button class="btn-modal" onclick="pergunta5()">Invado o reino deles com 500 arqueiros.</button>
+        <button class="btn-modal" onclick="falhou('Pagar pela galinha? Cadê sua honra de cavaleiro?')">Devolvo a galinha e peço desculpas.</button>
+    `;
+}
+
+function pergunta5() {
+    document.getElementById('tituloModal').innerText = "📜 Fase 5: Economia";
+    document.getElementById('textoModal').innerText = "Onde você guarda suas moedas de ouro?";
+    document.getElementById('botoesModal').innerHTML = `
+        <button class="btn-modal" onclick="pergunta6()">Em um baú enterrado no pátio.</button>
+        <button class="btn-modal" onclick="falhou('Banco Central? O que é isso? Algum tipo de tortura?')">No meu Banco Digital.</button>
+    `;
+}
+
+function pergunta6() {
+    document.getElementById('tituloModal').innerText = "📜 Fase 6: Transporte";
+    document.getElementById('textoModal').innerText = "Seu cavalo quebrou a ferradura no meio da floresta. O que você faz?";
+    document.getElementById('botoesModal').innerHTML = `
+        <button class="btn-modal" onclick="perguntaFinal()">Carrego o cavalo nas costas até a vila.</button>
+        <button class="btn-modal" onclick="falhou('Guincho? Você está delirando pela peste negra, só pode.')">Chamo um guincho 24h.</button>
+    `;
+}
+
+function perguntaFinal() {
+    document.getElementById('tituloModal').innerText = "👑 O Veredito Final";
+    document.getElementById('textoModal').innerText = "ÚLTIMA CHANCE: Você aceita que este castelo é feito de papelão real e não de pedra de verdade?";
+    document.getElementById('botoesModal').innerHTML = `
+        <button class="btn-modal" style="background: #27ae60" onclick="sucesso()">SIM, O PAPELÃO É A PEDRA DO FUTURO!</button>
+        <button class="btn-modal" onclick="falhou('A verdade dói, né? Volte quando souber apreciar a arte do papelão!')">Não, eu quero pedra de verdade!</button>
+    `;
+}
+
+function sucesso() {
+    document.getElementById('tituloModal').innerText = "🏰 BEM-VINDO AO TRONO!";
+    document.getElementById('textoModal').innerText = "Magnífico! Você provou ser um nobre resiliente, bruto e fã de papelão. O Castelo de Valerius agora é seu! Vá pegar sua coroa (também de papelão) na recepção.";
+    document.getElementById('botoesModal').innerHTML = `
+        <button class="btn-modal" style="background: #d4af37; color: black;" onclick="fecharEVoltar()">REINAR COM SABEDORIA</button>
+    `;
+}
+
+function falhou(motivo) {
+    document.getElementById('tituloModal').innerText = "❌ VOCÊ FOI EXILADO!";
+    document.getElementById('textoModal').innerText = motivo;
+    document.getElementById('botoesModal').innerHTML = `
+        <button class="btn-modal" style="background: #333" onclick="fecharEVoltar()">Voltar para a lama (Início)</button>
+    `;
+}
+
+function fecharEVoltar() {
+    location.reload();
+}
+    </script>
+
+</body>
+
+</html>
