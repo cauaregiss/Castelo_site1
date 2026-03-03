@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Crônicas e História | Royal Estate</title>
+
+    <style>
+        /* === ESTILO PERGAMINHO CHAMATIVO === */
+        body {
+            margin: 0;
+            /* Fundo que simula uma mesa de madeira escura */
+            background: #2c1b0e url('https://www.transparenttextures.com/patterns/dark-wood.png');
+            font-family: 'Georgia', serif;
+            color: #4a3728;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        /* === NAVBAR REVISADA (RESPONSIVA) === */
+        nav {
+            background: #000;
+            padding: 15px;
+            text-align: center;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            border-bottom: 3px solid var(--dourado);
+
+            /* Mágica para organizar os links */
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap; /* Faz os links pularem de linha se não couberem */
+            gap: 15px; /* Cria um espaço fixo entre cada link */
+        }
+
+        nav a {
+            color: #fff;
+            text-decoration: none;
+            font-weight: bold;
+            transition: 0.3s;
+            text-transform: uppercase;
+            font-size: 0.85rem; /* Diminuímos um pouquinho para caber melhor */
+            white-space: nowrap; /* Impede que o texto de um link quebre em dois */
+        }
+
+        /* Ajuste específico para telas bem pequenas (celulares) */
+        @media (max-width: 480px) {
+            nav {
+                padding: 10px;
+                gap: 10px;
+            }
+
+            nav a {
+                font-size: 0.75rem; /* Letra um pouco menor no celular */
+                padding: 5px 10px;
+                border: 1px solid rgba(212, 175, 55, 0.2); /* Um contorno sutil */
+                border-radius: 4px;
+            }
+        }
+
+        /* === O PERGAMINHO === */
+        .pergaminho {
+            max-width: 800px;
+            margin: 50px 20px;
+            background: #f2e1ac;
+            /* Cor de papel envelhecido */
+            background-image: url('https://www.transparenttextures.com/patterns/paper-fibers.png');
+            padding: 60px;
+            box-shadow: 0 0 50px rgba(0, 0, 0, 0.8), inset 0 0 100px rgba(139, 69, 19, 0.2);
+            border: 20px solid transparent;
+            /* Borda que parece papel rasgado/queimado */
+            border-image: url('https://www.transparenttextures.com/patterns/natural-paper.png') 30 round;
+            position: relative;
+        }
+
+        /* Enfeite das pontas do pergaminho */
+        .pergaminho::before,
+        .pergaminho::after {
+            content: "";
+            position: absolute;
+            height: 20px;
+            width: 100%;
+            background: #d4af37;
+            left: 0;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.5);
+        }
+
+        .pergaminho::before {
+            top: -25px;
+            border-radius: 10px 10px 0 0;
+        }
+
+        .pergaminho::after {
+            bottom: -25px;
+            border-radius: 0 0 10px 10px;
+        }
+
+        h1 {
+            text-align: center;
+            font-variant: small-caps;
+            font-size: 2.5rem;
+            border-bottom: 2px solid #8b4513;
+            margin-bottom: 30px;
+            color: #5d4037;
+        }
+
+        h2 {
+            color: #8b4513;
+            border-bottom: 1px solid #d4af37;
+            display: inline-block;
+        }
+
+        .dropcap {
+            float: left;
+            font-size: 4rem;
+            line-height: 0.8;
+            padding-right: 10px;
+            color: #b03a2e;
+            /* Letra capitular vermelha medieval */
+            font-family: 'Times New Roman', serif;
+        }
+
+        p {
+            font-size: 1.2rem;
+            text-align: justify;
+            line-height: 1.8;
+        }
+
+        .curiosidade-box {
+            background: rgba(139, 69, 19, 0.1);
+            padding: 20px;
+            border-left: 5px solid #8b4513;
+            margin: 30px 0;
+            font-style: italic;
+        }
+
+        footer {
+            margin-bottom: 50px;
+            color: #d4af37;
+        }
+
+        @media (max-width: 600px) {
+            .pergaminho {
+                padding: 30px;
+            }
+
+            h1 {
+                font-size: 1.8rem;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <nav>
+        <a href="index.html"> Anúncio</a>
+        <a href="historia.html">História</a>
+        <a href="gestao.html"> Gestão</a>
+         <a href="contato.html">Contato</a>
+    </nav>
+
+    <article class="pergaminho">
+        <h1>Crônicas da Arquitetura Militar</h1>
+
+        <p><span class="dropcap">O</span> surgimento dos castelos remonta ao século IX, na Europa. Diferente do que
+            muitos pensam, eles não eram apenas casas de luxo, mas máquinas de guerra habitáveis. Cada torre, cada fosso
+            e cada muralha tinha o propósito de proteger o senhor feudal e seu povoado.</p>
+
+        <h2>A Era das Pedras</h2>
+        <p>Os primeiros castelos eram feitos de madeira (Motte and Bailey), mas logo evoluíram para as imponentes
+            fortalezas de pedra que conhecemos. A engenharia era tão avançada que algumas muralhas chegavam a ter 6
+            metros de espessura para resistir a catapultas e aríetes.</p>
+
+        <div class="curiosidade-box">
+            <strong>Você sabia?</strong> As escadas em caracol das torres eram sempre construídas no sentido horário.
+            Isso era para que os defensores (que geralmente eram destros) tivessem espaço para usar a espada, enquanto
+            os atacantes ficavam com o braço da espada bloqueado pela coluna central da escada!
+        </div>
+
+        <h2>Sistemas de Defesa</h2>
+        <ul>
+            <li><strong>Muralhas (A Muralha de Aethelgard):</strong> Projetadas com inclinação para que pedras jogadas
+                de cima ricocheteassem nos inimigos.</li>
+            <li><strong>Torre de Menagem:</strong> O último reduto de defesa. Se tudo falhasse, era para lá que todos
+                fugiam.</li>
+            <li><strong>Portaria e Ponte Levadiça:</strong> O ponto mais fraco, porém o mais protegido com grades de
+                ferro chamadas de "rastrilhos".</li>
+        </ul>
+
+        <p>Ao desenvolver nossa própria fortificação conceitual, prestamos homenagem aos grandes mestres construtores da
+            Idade Média, resgatando princípios fundamentais de engenharia e arquitetura histórica. Cada etapa do
+            processo construtivo é orientada pela aplicação consciente da geometria estrutural e dos conceitos de
+            resistência física, garantindo equilíbrio, estabilidade e coerência técnica.
+
+            Mesmo em um projeto de caráter simbólico, cada dobra, cada junção e cada ponto de fixação são planejados com
+            rigor metodológico, refletindo a integração entre criatividade, conhecimento técnico e visão estratégica.
+            Assim, transformamos um exercício construtivo em uma releitura contemporânea dos fundamentos que sustentaram
+            as grandes fortalezas do passado.</p>
+    </article>
+
+    <footer>
+        Manuscrito Digital - Ano de 2026
+    </footer>
+
+</body>
+
+</html>

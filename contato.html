@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contato Real | Envie seu Pombo</title>
+    
+    <style>
+        :root {
+            --dourado: #d4af37;
+            --dark: #1a1a1a;
+            --papel: #f4e4bc; 
+        }
+
+        body {
+            margin: 0;
+            font-family: 'Georgia', serif;
+            background-color: var(--dark);
+            color: #333;
+        }
+
+        /* === NAVBAR REVISADA (RESPONSIVA) === */
+        nav {
+            background: #000;
+            padding: 15px;
+            text-align: center;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            border-bottom: 3px solid var(--dourado);
+            
+            /* Mágica para organizar os links */
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap; /* Faz os links pularem de linha se não couberem */
+            gap: 15px; /* Cria um espaço fixo entre cada link */
+        }
+
+        nav a {
+            color: #fff;
+            text-decoration: none;
+            font-weight: bold;
+            transition: 0.3s;
+            text-transform: uppercase;
+            font-size: 0.85rem; /* Diminuímos um pouquinho para caber melhor */
+            white-space: nowrap; /* Impede que o texto de um link quebre em dois */
+        }
+
+        /* Ajuste específico para telas bem pequenas (celulares) */
+        @media (max-width: 480px) {
+            nav {
+                padding: 10px;
+                gap: 10px;
+            }
+            
+            nav a {
+                font-size: 0.75rem; /* Letra um pouco menor no celular */
+                padding: 5px 10px;
+                border: 1px solid rgba(212, 175, 55, 0.2); /* Um contorno sutil */
+                border-radius: 4px;
+            }
+        }
+
+        /* === CONTAINER PERGAMINHO === */
+        .pergaminho-container {
+            max-width: 700px;
+            margin: 50px auto;
+            background-color: var(--papel);
+            padding: 60px;
+            border-radius: 5px;
+            box-shadow: 0 0 30px rgba(0,0,0,0.5), inset 0 0 100px rgba(139, 69, 19, 0.2);
+            position: relative;
+            border: 1px solid #d2b48c;
+        }
+
+        h1 {
+            text-align: center;
+            color: #5d4037;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            border-bottom: 2px solid #5d4037;
+            padding-bottom: 10px;
+        }
+
+        .instrucao {
+            text-align: center;
+            font-style: italic;
+            margin-bottom: 30px;
+            color: #795548;
+        }
+
+        /* === FORMULÁRIO === */
+        form {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        .campo {
+            display: flex;
+            flex-direction: column;
+        }
+
+        label {
+            font-weight: bold;
+            color: #5d4037;
+            margin-bottom: 5px;
+        }
+
+        input, textarea, select {
+            padding: 12px;
+            border: 1px solid #bda385;
+            background: rgba(255, 255, 255, 0.5);
+            border-radius: 4px;
+            font-family: 'Georgia', serif;
+            font-size: 1rem;
+        }
+
+        .btn-enviar {
+            background: #5d4037;
+            color: white;
+            padding: 15px;
+            border: none;
+            border-radius: 5px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: 0.3s;
+            font-size: 1.1rem;
+            margin-top: 10px;
+        }
+
+        .btn-enviar:hover {
+            background: #3e2723;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+        }
+
+        .localizacao {
+            margin-top: 40px;
+            text-align: center;
+            border-top: 1px solid #bda385;
+            padding-top: 20px;
+            color: #5d4037;
+        }
+    </style>
+</head>
+<body>
+
+    <nav>
+        <a href="index.html"> Anúncio</a>
+        <a href="historia.html"> História</a>
+        <a href="gestao.html"> Gestão</a>
+        <a href="contato.html"> Contato</a>
+    </nav>
+
+    <div class="pergaminho-container">
+        <h1>Decretos e Mensagens</h1>
+        <p class="instrucao">O seu formulário agora está conectado ao seu e-mail via Formspree.</p>
+
+        <form action="https://formspree.io/f/mreawobj" method="POST">
+            
+            <div class="campo">
+                <label>Vossa Graça (Nome):</label>
+                <input type="text" name="Nome Nobre" placeholder="Ex: Lorde Silva" required>
+            </div>
+
+            <div class="campo">
+                <label>Vosso Correio Eletrônico (E-mail):</label>
+                <input type="email" name="email" placeholder="nobre@reino.com" required>
+            </div>
+
+            <div class="campo">
+                <label>Urgência da Mensagem:</label>
+                <select name="Prioridade">
+                    <option value="Baixa">Assunto de Taberna (Baixa)</option>
+                    <option value="Média">Negociações de Terras (Média)</option>
+                    <option value="ALTA">ATAQUE DE DRAGÃO (Urgente!)</option>
+                </select>
+            </div>
+
+            <div class="campo">
+                <label>Vossa Mensagem:</label>
+                <textarea name="Mensagem" rows="5" placeholder="Escreva aqui seu decreto..." required></textarea>
+            </div>
+
+            <input type="hidden" name="_subject" value="Novo Decreto do Castelo de Valerius!">
+
+            <button type="submit" class="btn-enviar">LANÇAR POMBO-CORREIO</button>
+        </form>
+
+        <div class="localizacao">
+            <p>📍 <b>Reino de Valerius</b><br>
+            <i>Horário de audiência: Meio-dia às 13h (Hora do recreio)</i></p>
+        </div>
+    </div>
+
+    <footer style="text-align: center; padding: 20px; color: #555; font-size: 0.8rem;">
+        &copy; 2026 Imobiliária Real - Mensagens via Formspree
+    </footer>
+
+</body>
+</html>
